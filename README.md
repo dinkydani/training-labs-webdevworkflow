@@ -1,4 +1,4 @@
-Web Developer's Toolbox Lab Project
+Web Developer's Toolbox Lab Project - Danielle
 ----
 
 This repository contains a base skeleton to be used during the "Web Developer's 
