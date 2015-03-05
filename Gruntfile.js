@@ -5,6 +5,9 @@ module.exports = function( grunt ) {
     clean: {
       dist: {
         src: ['dist/']
+      },
+      vendor: {
+        src: ['src/js/vendor']
       }
     },
 
@@ -21,10 +24,10 @@ module.exports = function( grunt ) {
         src: ['*.html'],
         dest: 'dist/'
       },
-      js: {
+      data: {
         expand: true,
         cwd: 'src/',
-        src: ['js/**/*'],
+        src: ['data.json'],
         dest: 'dist/'
       }
     },
@@ -39,14 +42,33 @@ module.exports = function( grunt ) {
         }
       }
     },
-    uglify: {
-      options: {
-        mangle: true,
-      },
-      
-      myApp: {
+    bower: {
+      install: {
+        options: {
+          copy: false
+        }
+      }
+    },
+    uglify: { 
+      app: {
+        options: {
+          mangle: true,
+          sourceMap: true,
+          sourceMapName: "dist/js/app-source.map",
+          sourceMapIncludeSources: true
+        },
         files: {
-          "build/app-code.min.js": ["src/**/*.js"]
+          "dist/js/app.min.js": ["src/js/app.js", "src/**/*.js", "!src/js/vendor/**/*.js"]
+        }
+      },
+      vendor: {
+        options: {
+          mangle: false
+        },
+        files: {
+          "dist/js/vendor.min.js": [
+            "src/js/vendor/underscore/underscore.js",
+            "src/js/vendor/jquery/dist/jquery.js"]
         }
       }
     }
@@ -57,8 +79,9 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['jshint', 'clean', 'copy']);
+  grunt.registerTask('default', ['clean', 'jshint', 'bower', 'uglify', 'copy']);
     
 };
