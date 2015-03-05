@@ -1,0 +1,13 @@
+@import "variables";
+
+body {
+  font: {
+    family: arial; 
+    size: 11px;
+    weight: bold;
+  }
+}
+
+.title {
+  color: $red;
+}

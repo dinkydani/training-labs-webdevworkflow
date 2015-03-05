@@ -4,31 +4,31 @@ module.exports = function( grunt ) {
 
     clean: {
       dist: {
-        src: ['dist/']
+        src: ["dist/"]
       },
       vendor: {
-        src: ['src/js/vendor']
+        src: ["src/js/vendor"]
       }
     },
 
     copy: {
       assets: {
         expand: true,
-        cwd: 'src/',
-        src: ['assets/**/*'],
-        dest: 'dist/'
+        cwd: "src/",
+        src: ["assets/**/*"],
+        dest: "dist/"
       },
       html: {
         expand: true,
-        cwd: 'src/',
-        src: ['*.html'],
-        dest: 'dist/'
+        cwd: "src/",
+        src: ["*.html"],
+        dest: "dist/"
       },
       data: {
         expand: true,
-        cwd: 'src/',
-        src: ['data.json'],
-        dest: 'dist/'
+        cwd: "src/",
+        src: ["data.json"],
+        dest: "dist/"
       }
     },
     jshint: {
@@ -71,17 +71,30 @@ module.exports = function( grunt ) {
             "src/js/vendor/jquery/dist/jquery.js"]
         }
       }
+    },
+    qunit: {
+      basic: ["specs/*.html"]
+    },
+    sass: {
+      dist: {
+        files: {
+          "dist/css/screen.css": "src/sass/screen.scss"
+        }
+      }
     }
 
   });
 
 
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-bower-task");
+  grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-contrib-qunit");
+  grunt.loadNpmTasks("grunt-sass");
 
-  grunt.registerTask('default', ['clean', 'jshint', 'bower', 'uglify', 'copy']);
+
+  grunt.registerTask("default", ["clean", "jshint", "bower", "qunit", "uglify", "sass", "copy"]);
     
 };
