@@ -1,5 +1,7 @@
 window.beerApp = (window.beerApp || {});
 window.beerApp.Beer = (function($) {
+    "use strict";
+
     var nextId = 0;
 
 	var Beer = function( options ) {
@@ -7,7 +9,7 @@ window.beerApp.Beer = (function($) {
         var default_abv = 0;
 
         _.extend(this, {
-            name: 'Beer',
+            name: "Beer",
             brewery: null,
             description: null,
             abv: default_abv
